@@ -29,8 +29,7 @@ contract SoliDoX is ERC721URIStorage {
         _mint(msg.sender, documentId);
         _setTokenURI(documentId, data);
 
-        // Increments the counter by two
-        _documentIdCounter.increment();
+        // Increments the counter
         _documentIdCounter.increment();
 
         return documentId;
