@@ -26,7 +26,7 @@ contract SoliDoX is ERC721URIStorage {
         uint256 documentId = _documentIdCounter.current();
 
         // Issues the new document
-        _mint(msg.sender, documentId);
+        _safeMint(msg.sender, documentId);
         _setTokenURI(documentId, data);
 
         // Increments the counter
@@ -56,5 +56,13 @@ contract SoliDoX is ERC721URIStorage {
 
         // Returns the document data
         return tokenURI(documentId);
+    }
+
+    function getIssuer(uint256 documentId) public view returns (address) {
+        // Checks if the document exists
+        require(_exists(documentId), "Document does not exist");
+
+        // Returns the document issuer
+        return ownerOf(documentId);
     }
 }
