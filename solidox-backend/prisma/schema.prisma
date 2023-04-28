@@ -19,7 +19,7 @@ model Organization {
 }
 
 model Quotes {
-  id               String @id @default(auto()) @map("_id") @db.ObjectId
-  organizationName String
-  email            String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  orgName String
+  email   String
 }
