@@ -5,13 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { LottieModule } from 'ngx-lottie';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
 }
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [AppComponent, HomePageComponent, LoginPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
