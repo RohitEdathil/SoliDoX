@@ -12,6 +12,7 @@ datasource db {
 
 model Organization {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  address          String
   name             String
   usedStorage      Float
   availableStorage Float
