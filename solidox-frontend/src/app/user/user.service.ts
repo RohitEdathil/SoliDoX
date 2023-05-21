@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 })
 export class UserService {
   provider: ethers.providers.Web3Provider;
-
+  signer!: ethers.providers.JsonRpcSigner;
   constructor() {
     let ethereum = (window as any).ethereum;
 
@@ -20,5 +20,24 @@ export class UserService {
   }
   async login() {
     await this.provider.send('eth_requestAccounts', []);
+    const account = await this.provider.listAccounts();
+
+    if (account.length === 0) {
+      alert('Please login to MetaMask.');
+      throw new Error('Please login to MetaMask.');
+    }
+
+    if (account.length > 1) {
+      alert('Please select one account.');
+      throw new Error('Please select one account.');
+    }
+
+    this.signer = this.provider.getSigner();
+
+    const loginMessage = JSON.stringify({
+      timestamp: Date.now(),
+      address: account[0],
+    });
+    const signature = await this.signer.signMessage(loginMessage);
   }
 }
