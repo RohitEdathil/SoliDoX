@@ -7,3 +7,11 @@ export class SignUpDto {
   @IsEmail()
   email: string;
 }
+
+export class LoginDto {
+  @IsNotEmpty()
+  address: string;
+
+  @IsEmail()
+  signature: string;
+}

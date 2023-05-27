@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -9,9 +10,11 @@ import { UserService } from '../user.service';
 })
 export class LoginPageComponent {
   userService: UserService;
+  router: Router;
 
-  constructor(userService: UserService) {
+  constructor(userService: UserService, router: Router) {
     this.userService = userService;
+    this.router = router;
   }
 
   lockLottie: AnimationOptions = {
@@ -20,5 +23,9 @@ export class LoginPageComponent {
 
   async login() {
     await this.userService.login();
+  }
+
+  async signup() {
+    this.router.navigate(['/signup']);
   }
 }
