@@ -64,6 +64,10 @@ input {
   margin: 0px;
 }
 
+.smooth {
+  transition: all 0.3s ease-in-out;
+}
+
 .wide-input {
   width: 600px;
 }

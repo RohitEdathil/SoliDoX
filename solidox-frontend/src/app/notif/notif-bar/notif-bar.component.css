@@ -1,0 +1,18 @@
+.hidden {
+  bottom: -100px;
+}
+
+.error {
+  background-color: var(--bad);
+}
+
+p {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: var(--primary);
+  color: var(--bg);
+}

@@ -7,13 +7,14 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 import { LottieModule } from 'ngx-lottie';
 import { LoginPageComponent } from './user/login-page/login-page.component';
 import { SignupPageComponent } from './user/signup-page/signup-page.component';
+import { NotifBarComponent } from './notif/notif-bar/notif-bar.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
 }
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, LoginPageComponent, SignupPageComponent],
+  declarations: [AppComponent, HomePageComponent, LoginPageComponent, SignupPageComponent, NotifBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
