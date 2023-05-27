@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, ValidateNested } from 'class-validator';
 
 export class SignUpDto {
   @IsNotEmpty()
@@ -10,8 +10,11 @@ export class SignUpDto {
 
 export class LoginDto {
   @IsNotEmpty()
+  signature: string;
+
+  @IsNotEmpty()
   address: string;
 
-  @IsEmail()
-  signature: string;
+  @IsNotEmpty()
+  timestamp: number;
 }
