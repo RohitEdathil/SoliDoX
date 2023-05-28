@@ -34,10 +34,7 @@ export class UserService {
 
     this.signer = this.provider.getSigner();
 
-    const loginMessage = JSON.stringify({
-      timestamp: Date.now(),
-      address: account[0],
-    });
+    const loginMessage = `${account[0]}-${Date.now()}`;
     const signature = await this.signer.signMessage(loginMessage);
   }
 }
