@@ -1,37 +1,25 @@
-import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
-import { db } from 'src/utils/db.instance';
+import { Body, Controller, Post } from '@nestjs/common';
 import { success } from 'src/utils/utils.functions';
 import { LoginDto, SignUpDto } from './auth.dto';
-import { ConfigService } from '@nestjs/config';
+
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  configService: ConfigService;
-
-  constructor(configService: ConfigService) {
-    this.configService = configService;
-  }
+  constructor(private authService: AuthService) {}
 
   @Post('signup')
   async signUp(@Body() details: SignUpDto) {
-    // Create quote
-    await db.quotes.create({
-      data: {
-        email: details.email,
-        orgName: details.orgName,
-      },
-    });
-
+    this.authService.signUp(details.orgName, details.email);
     return success('Our team will get in touch with you soon!');
   }
 
   @Post('login')
   async login(@Body() creds: LoginDto) {
-    // Ensure signature is not expired
-    const signatureExpiryMinutes =
-      this.configService.get<number>('SIGN_EXPIRY');
-    if (Date.now() - creds.timestamp > 1000 * 60 * signatureExpiryMinutes) {
-      throw new UnauthorizedException('Signature expired');
-    }
+    return this.authService.login(
+      creds.address,
+      creds.timestamp,
+      creds.signature,
+    );
   }
 }
