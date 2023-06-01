@@ -5,6 +5,10 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { OrgController } from './org/org.controller';
+import { DocController } from './doc/doc.controller';
+import { DocService } from './doc/doc.service';
+import { StorageService } from './utils/storage.service';
 
 @Module({
   imports: [
@@ -22,7 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AppController, AuthController, OrgController, DocController],
+  providers: [AppService, AuthService, DocService, StorageService],
 })
 export class AppModule {}

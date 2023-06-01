@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { db } from 'src/utils/db.instance';
 import { ConfigService } from '@nestjs/config';
 import { verifyMessage } from 'ethers';
-import { success } from 'src/utils/utils.functions';
+import { success } from 'src/utils/responses';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -48,7 +48,10 @@ export class AuthService {
       throw new UnauthorizedException('Account not found');
     }
 
-    const accessToken = this.jwtService.sign({ address: address });
+    const accessToken = this.jwtService.sign({
+      address: address,
+      orgId: account.id,
+    });
 
     return { ...success('Login successful'), accessToken: accessToken };
   }
