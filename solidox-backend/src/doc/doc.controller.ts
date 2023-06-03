@@ -24,6 +24,11 @@ export class DocController {
     @Body() createDocDto: CreateDocDto,
     @Req() req: ExtendedRequest,
   ) {
-    return this.docService.issue(createDocDto.expiryDate, doc, req.orgId);
+    return this.docService.issue(
+      createDocDto.expiryDate,
+      doc,
+      req.orgId,
+      createDocDto.sdxId,
+    );
   }
 }

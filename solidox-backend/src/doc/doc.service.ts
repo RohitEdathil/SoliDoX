@@ -14,7 +14,12 @@ import { StorageService } from 'src/utils/storage.service';
 export class DocService {
   constructor(private storageService: StorageService) {}
 
-  async issue(expiryDate: string, doc: Express.Multer.File, orgId: string) {
+  async issue(
+    expiryDate: string,
+    doc: Express.Multer.File,
+    orgId: string,
+    sdxId: string,
+  ) {
     // Fetch the org from the database
     const org = await db.organization.findFirst({
       where: {
@@ -57,6 +62,7 @@ export class DocService {
         localPath: path,
         issuedOn: new Date(),
         name: doc.originalname,
+        sdxId,
         issuedBy: {
           connect: {
             id: orgId,
