@@ -20,7 +20,7 @@ model Organization {
   createdAt        DateTime   @default(now())
 }
 
-model Quotes {
+model Signup {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   orgName String
   email   String

@@ -14,7 +14,7 @@ export class AuthService {
 
   async signUp(orgName: string, email: string) {
     // Create quote
-    await db.quotes.create({
+    await db.signup.create({
       data: {
         email: email,
         orgName: orgName,
