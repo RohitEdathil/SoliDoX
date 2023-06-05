@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -20,6 +21,11 @@ export class DocService {
     orgId: string,
     sdxId: string,
   ) {
+    // Ensure doc is not empty
+    if (!doc) {
+      throw new BadRequestException('No document provided');
+    }
+
     // Fetch the org from the database
     const org = await db.organization.findFirst({
       where: {
