@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
+import { ApiService } from '../api/api.service';
+import { NotifService, NotifType } from '../notif/notif.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +10,11 @@ import { ethers } from 'ethers';
 export class UserService {
   provider: ethers.providers.Web3Provider;
   signer!: ethers.providers.JsonRpcSigner;
-  constructor() {
+  constructor(
+    private apiService: ApiService,
+    private notifService: NotifService,
+    private router: Router
+  ) {
     let ethereum = (window as any).ethereum;
 
     // Ensure the browser has MetaMask installed
@@ -23,18 +30,61 @@ export class UserService {
     const account = await this.provider.listAccounts();
 
     if (account.length === 0) {
-      alert('Please login to MetaMask.');
-      throw new Error('Please login to MetaMask.');
+      this.notifService.show('Please select an account.', NotifType.ERROR);
+      throw new Error();
     }
 
     if (account.length > 1) {
-      alert('Please select one account.');
-      throw new Error('Please select one account.');
+      this.notifService.show(
+        'Please select only one account.',
+        NotifType.ERROR
+      );
+      return;
     }
 
     this.signer = this.provider.getSigner();
 
-    const loginMessage = `${account[0]}-${Date.now()}`;
-    const signature = await this.signer.signMessage(loginMessage);
+    const timestamp = Date.now();
+    const loginMessage = `${account[0]}-${timestamp}`;
+
+    let signature: string;
+    try {
+      signature = await this.signer.signMessage(loginMessage);
+    } catch (e) {
+      this.notifService.show(
+        'Please sign the message to login.',
+        NotifType.ERROR
+      );
+      return;
+    }
+
+    const loginResponse = await this.apiService.post('/auth/login', {
+      timestamp,
+      signature,
+      address: account[0],
+    });
+
+    this.apiService.setToken(loginResponse.accessToken);
+    window.localStorage.setItem('accessToken', loginResponse.accessToken);
+
+    this.router.navigate(['/dashboard']);
+  }
+
+  async attemptPersistantLogin() {
+    // Fetch the access token from local storage
+    const accessToken = window.localStorage.getItem('accessToken');
+
+    // Paths that do not require authentication
+    const publicPaths = ['/', '/login', '/signup', '/verify'];
+
+    // no access token, redirect to login if not on a public path
+    if (!accessToken) {
+      if (!publicPaths.includes(window.location.pathname)) {
+        this.router.navigate(['/login']);
+      }
+      return;
+    }
+    // Set the access token in the api service
+    this.apiService.setToken(accessToken);
   }
 }
