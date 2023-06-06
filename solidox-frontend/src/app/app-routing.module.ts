@@ -6,6 +6,7 @@ import { SignupPageComponent } from './user/signup-page/signup-page.component';
 import { DashboardPageComponent } from './dashboard/pages/dashboard-page/dashboard-page.component';
 import { BulkIssuePageComponent } from './dashboard/pages/bulk-issue-page/bulk-issue-page.component';
 import { BulkVerifyPageComponent } from './dashboard/pages/bulk-verify-page/bulk-verify-page.component';
+import { SettingsPageComponent } from './dashboard/pages/settings-page/settings-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardPageComponent },
   { path: 'bulk-issue', component: BulkIssuePageComponent },
   { path: 'bulk-verify', component: BulkVerifyPageComponent },
+  { path: 'settings', component: SettingsPageComponent },
 ];
 
 @NgModule({

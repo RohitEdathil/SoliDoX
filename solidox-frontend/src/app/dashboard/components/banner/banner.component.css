@@ -1,0 +1,58 @@
+:host {
+  font-size: 30px;
+  color: var(--text);
+  font-weight: bold;
+  padding: 53px 25px;
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: linear-gradient(
+      30deg,
+      #a1c4eb 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #a1c4eb 87.5%,
+      #a1c4eb
+    ),
+    linear-gradient(
+      150deg,
+      #a1c4eb 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #a1c4eb 87.5%,
+      #a1c4eb
+    ),
+    linear-gradient(
+      30deg,
+      #a1c4eb 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #a1c4eb 87.5%,
+      #a1c4eb
+    ),
+    linear-gradient(
+      150deg,
+      #a1c4eb 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #a1c4eb 87.5%,
+      #a1c4eb
+    ),
+    linear-gradient(
+      60deg,
+      #a1c4eb77 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #a1c4eb77 75%,
+      #a1c4eb77
+    ),
+    linear-gradient(
+      60deg,
+      #a1c4eb77 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #a1c4eb77 75%,
+      #a1c4eb77
+    );
+  background-size: 52px 91px;
+  background-position: 0 0, 0 0, 26px 46px, 26px 46px, 0 0, 26px 46px;
+}

@@ -50,7 +50,7 @@ img {
 }
 
 #usage {
-  margin: auto 10px 15px 10px;
+  margin: 15px 10px 15px 10px;
   width: 70%;
   padding: 10px;
 }
@@ -78,4 +78,17 @@ img {
 p {
   font-size: 13px;
   margin: 4px 0px;
+}
+
+#spacer {
+  margin-top: auto;
+}
+
+.bottom {
+  align-self: flex-start;
+}
+
+hr {
+  width: 80%;
+  margin: 0px;
 }

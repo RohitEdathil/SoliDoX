@@ -13,6 +13,8 @@ import { UserService } from './user/user.service';
 import { NavComponent } from './dashboard/components/nav/nav.component';
 import { BulkIssuePageComponent } from './dashboard/pages/bulk-issue-page/bulk-issue-page.component';
 import { BulkVerifyPageComponent } from './dashboard/pages/bulk-verify-page/bulk-verify-page.component';
+import { SettingsPageComponent } from './dashboard/pages/settings-page/settings-page.component';
+import { BannerComponent } from './dashboard/components/banner/banner.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -29,6 +31,8 @@ export function playerFactory(): any {
     NavComponent,
     BulkIssuePageComponent,
     BulkVerifyPageComponent,
+    SettingsPageComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,
