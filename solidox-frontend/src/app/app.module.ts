@@ -15,6 +15,7 @@ import { BulkIssuePageComponent } from './dashboard/pages/bulk-issue-page/bulk-i
 import { BulkVerifyPageComponent } from './dashboard/pages/bulk-verify-page/bulk-verify-page.component';
 import { SettingsPageComponent } from './dashboard/pages/settings-page/settings-page.component';
 import { BannerComponent } from './dashboard/components/banner/banner.component';
+import { IssuePageComponent } from './dashboard/pages/issue-page/issue-page.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -33,6 +34,7 @@ export function playerFactory(): any {
     BulkVerifyPageComponent,
     SettingsPageComponent,
     BannerComponent,
+    IssuePageComponent,
   ],
   imports: [
     BrowserModule,
