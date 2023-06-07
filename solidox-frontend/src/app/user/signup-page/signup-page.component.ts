@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NotifService, NotifType } from 'src/app/notif/notif.service';
 
 @Component({
   selector: 'app-signup-page',

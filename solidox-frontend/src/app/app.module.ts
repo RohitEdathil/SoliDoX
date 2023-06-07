@@ -16,6 +16,7 @@ import { BulkVerifyPageComponent } from './dashboard/pages/bulk-verify-page/bulk
 import { SettingsPageComponent } from './dashboard/pages/settings-page/settings-page.component';
 import { BannerComponent } from './dashboard/components/banner/banner.component';
 import { IssuePageComponent } from './dashboard/pages/issue-page/issue-page.component';
+import { FormsModule } from '@angular/forms';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -39,6 +40,7 @@ export function playerFactory(): any {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
 

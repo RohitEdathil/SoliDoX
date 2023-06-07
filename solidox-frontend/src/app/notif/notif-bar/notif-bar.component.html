@@ -1,3 +1,78 @@
-<p [class.hidden]="hidden" [class.error]="isError()" class="smooth">
+<p
+  [class.hidden]="hidden"
+  [class.error]="isError()"
+  [class.process]="isProcess()"
+  class="smooth"
+>
   {{ notif?.message }}
+  <svg
+    _ngcontent-ng-c3725857193=""
+    version="1.1"
+    id="L9"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="0 0 24 30"
+    xml:space="preserve"
+    *ngIf="isProcess()"
+  >
+    <rect
+      _ngcontent-ng-c3725857193=""
+      x="0"
+      y="0"
+      width="4"
+      height="10"
+      fill="#fff"
+    >
+      <animateTransform
+        _ngcontent-ng-c3725857193=""
+        attributeType="xml"
+        attributeName="transform"
+        type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0"
+        dur="0.6s"
+        repeatCount="indefinite"
+      ></animateTransform>
+    </rect>
+    <rect
+      _ngcontent-ng-c3725857193=""
+      x="10"
+      y="0"
+      width="4"
+      height="10"
+      fill="#fff"
+    >
+      <animateTransform
+        _ngcontent-ng-c3725857193=""
+        attributeType="xml"
+        attributeName="transform"
+        type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.2s"
+        dur="0.6s"
+        repeatCount="indefinite"
+      ></animateTransform>
+    </rect>
+    <rect
+      _ngcontent-ng-c3725857193=""
+      x="20"
+      y="0"
+      width="4"
+      height="10"
+      fill="#fff"
+    >
+      <animateTransform
+        _ngcontent-ng-c3725857193=""
+        attributeType="xml"
+        attributeName="transform"
+        type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.4s"
+        dur="0.6s"
+        repeatCount="indefinite"
+      ></animateTransform>
+    </rect>
+  </svg>
 </p>

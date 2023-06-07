@@ -26,6 +26,10 @@ export class NotifBarComponent {
     return this.notif?.type === NotifType.ERROR;
   }
 
+  isProcess() {
+    return this.notif?.type === NotifType.PROCESS_START;
+  }
+
   show(notif: Notif) {
     this.notif = notif;
     this.hidden = false;
@@ -34,6 +38,9 @@ export class NotifBarComponent {
     if (this.timer) {
       clearTimeout(this.timer);
     }
+
+    if (notif.type === NotifType.PROCESS_START) return;
+
     this.timer = setTimeout(() => {
       this.hidden = true;
     }, 3000);

@@ -6,6 +6,10 @@
   background-color: var(--bad);
 }
 
+.process {
+  background-color: var(--text);
+}
+
 p {
   position: fixed;
   bottom: 0px;
@@ -15,4 +19,12 @@ p {
   border-radius: 6px;
   background-color: var(--primary);
   color: var(--bg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+svg {
+  padding-left: 10px;
+  width: 17px;
 }

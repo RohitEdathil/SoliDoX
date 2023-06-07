@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotifService, NotifType } from '../notif/notif.service';
+import { NotifService } from '../notif/notif.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class ApiService {
 
     const data = await result.json();
     if (result.status >= 400) {
-      this.notifService.show(data.message, NotifType.ERROR);
+      this.notifService.error(data.message);
       throw new Error(data.message);
     }
     return data;

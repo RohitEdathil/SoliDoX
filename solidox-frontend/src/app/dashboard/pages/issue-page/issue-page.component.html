@@ -1,16 +1,18 @@
 <app-nav></app-nav>
 <main>
   <app-banner title="Create"></app-banner>
-  <div class="form-wrapper">
+  <form class="form-wrapper">
     <div class="input-wrapper">
       <p>Expiry Date</p>
-      <input type="date" />
+      <input type="date" [(ngModel)]="expiryDate" name="date" />
     </div>
     <div class="input-wrapper">
       <p>File</p>
-      <input type="file" />
+      <input type="file" [(ngModel)]="file" name="file" />
     </div>
 
-    <button class="btn-medium btn-extra-margin">Confirm</button>
-  </div>
+    <button (click)="issue()" class="btn-medium btn-extra-margin">
+      Confirm
+    </button>
+  </form>
 </main>

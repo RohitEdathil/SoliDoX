@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
 import { ApiService } from '../api/api.service';
-import { NotifService, NotifType } from '../notif/notif.service';
+import { NotifService } from '../notif/notif.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -30,15 +30,12 @@ export class UserService {
     const account = await this.provider.listAccounts();
 
     if (account.length === 0) {
-      this.notifService.show('Please select an account.', NotifType.ERROR);
+      this.notifService.error('Please select an account.');
       throw new Error();
     }
 
     if (account.length > 1) {
-      this.notifService.show(
-        'Please select only one account.',
-        NotifType.ERROR
-      );
+      this.notifService.error('Please select only one account.');
       return;
     }
 
@@ -51,10 +48,7 @@ export class UserService {
     try {
       signature = await this.signer.signMessage(loginMessage);
     } catch (e) {
-      this.notifService.show(
-        'Please sign the message to login.',
-        NotifType.ERROR
-      );
+      this.notifService.error('Please sign the message to login.');
       return;
     }
 
