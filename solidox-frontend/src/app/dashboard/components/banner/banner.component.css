@@ -5,6 +5,7 @@
   padding: 53px 25px;
   background-color: #ffffff;
   opacity: 1;
+  box-shadow: 10px -10px 13px -14px inset;
   background-image: linear-gradient(
       30deg,
       #a1c4eb 12%,

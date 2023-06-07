@@ -32,6 +32,7 @@ button {
 }
 
 .btn-medium {
+  padding: 12px;
   width: 200px;
 }
 
