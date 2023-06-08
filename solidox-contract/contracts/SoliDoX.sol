@@ -15,24 +15,25 @@ Format of the data:
 
 */
 contract SoliDoX is ERC721URIStorage {
-    // Generate unique token IDs
-    using Counters for Counters.Counter;
-    Counters.Counter private _documentIdCounter;
-
     constructor() ERC721("SoliDoX", "SDX") {}
 
-    function issueDocument(string memory data) public returns (uint256) {
-        // Fetches the current value
-        uint256 documentId = _documentIdCounter.current();
-
+    function issueDocument(string memory data, uint256 documentId) public {
         // Issues the new document
         _safeMint(msg.sender, documentId);
         _setTokenURI(documentId, data);
+    }
 
-        // Increments the counter
-        _documentIdCounter.increment();
-
-        return documentId;
+    function issueMultiple(
+        string[] memory data,
+        uint256[] memory documentIds
+    ) public {
+        for (uint256 i = 0; i < data.length; i++) {
+            // Fetches the current value
+            uint256 documentId = documentIds[i];
+            // Issues the new document
+            _safeMint(msg.sender, documentId);
+            _setTokenURI(documentId, data[i]);
+        }
     }
 
     function revokeDocument(uint256 documentId) public returns (uint256) {
