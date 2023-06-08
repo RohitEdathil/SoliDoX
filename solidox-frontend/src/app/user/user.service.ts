@@ -80,5 +80,10 @@ export class UserService {
     }
     // Set the access token in the api service
     this.apiService.setToken(accessToken);
+
+    // Automatically redirect to dashboard if on login page
+    if (window.location.pathname === '/login') {
+      this.router.navigate(['/dashboard']);
+    }
   }
 }
