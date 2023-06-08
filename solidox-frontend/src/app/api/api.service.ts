@@ -9,16 +9,35 @@ export class ApiService {
   token?: string = undefined;
   constructor(private notifService: NotifService) {}
 
-  private async _fetch(path: string, method: string, body: Object = {}) {
-    const result = await fetch(`${this.baseUrl}${path}`, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+  private async _fetch(
+    path: string,
+    method: string,
+    body: Object = {},
+    formData?: FormData
+  ) {
+    let result;
+
+    if (formData) {
+      result = await fetch(`${this.baseUrl}${path}`, {
+        method,
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: formData,
+      });
+    } else {
+      result = await fetch(`${this.baseUrl}${path}`, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify(body),
+      });
+    }
 
     const data = await result.json();
+
     if (result.status >= 400) {
       this.notifService.error(data.message);
       throw new Error(data.message);
@@ -28,6 +47,10 @@ export class ApiService {
 
   async post(path: string, body: Object) {
     return await this._fetch(path, 'POST', body);
+  }
+
+  async postFormData(path: string, body: FormData) {
+    return await this._fetch(path, 'POST', {}, body);
   }
 
   setToken(token: string) {

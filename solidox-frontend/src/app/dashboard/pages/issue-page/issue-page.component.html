@@ -8,7 +8,7 @@
     </div>
     <div class="input-wrapper">
       <p>File</p>
-      <input type="file" [(ngModel)]="file" name="file" />
+      <input type="file" name="file" (change)="fileChanged($event)" />
     </div>
 
     <button (click)="issue()" class="btn-medium btn-extra-margin">

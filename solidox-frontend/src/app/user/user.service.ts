@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class UserService {
   provider: ethers.providers.Web3Provider;
   signer!: ethers.providers.JsonRpcSigner;
+  address!: string;
   constructor(
     private apiService: ApiService,
     private notifService: NotifService,
@@ -39,6 +40,8 @@ export class UserService {
       return;
     }
 
+    this.address = account[0];
+
     this.signer = this.provider.getSigner();
 
     const timestamp = Date.now();
@@ -67,6 +70,10 @@ export class UserService {
   async attemptPersistantLogin() {
     // Fetch the access token from local storage
     const accessToken = window.localStorage.getItem('accessToken');
+    const account = await this.provider.listAccounts();
+
+    this.address = account[0];
+    this.signer = this.provider.getSigner();
 
     // Paths that do not require authentication
     const publicPaths = ['/', '/login', '/signup', '/verify'];

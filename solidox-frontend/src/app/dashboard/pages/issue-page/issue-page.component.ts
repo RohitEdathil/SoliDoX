@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DocService } from 'src/app/doc/doc.service';
 import { NotifService } from 'src/app/notif/notif.service';
 
 @Component({
@@ -8,9 +9,16 @@ import { NotifService } from 'src/app/notif/notif.service';
 })
 export class IssuePageComponent {
   file: File | null = null;
-  expiryDate: Date | null = null;
+  expiryDate: string | null = null;
 
-  constructor(private notifService: NotifService) {}
+  constructor(
+    private notifService: NotifService,
+    private docService: DocService
+  ) {}
+
+  fileChanged(event: any) {
+    this.file = event.target.files[0];
+  }
 
   async issue() {
     // Ensures a file is selected
@@ -18,12 +26,9 @@ export class IssuePageComponent {
       this.notifService.error('Please select a file');
       return;
     }
-
-    this.notifService.start('Issuing document');
-
-    // Simulate a delay
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-
-    this.notifService.end('Document issued');
+    await this.docService.issue(
+      this.file,
+      this.expiryDate ? new Date(this.expiryDate) : null
+    );
   }
 }
