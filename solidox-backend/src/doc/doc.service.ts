@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  StreamableFile,
   UnauthorizedException,
 } from '@nestjs/common';
 import { db } from 'src/utils/db.instance';
@@ -11,6 +12,8 @@ import { success } from 'src/utils/responses';
 import { JwtService } from '@nestjs/jwt';
 import { StorageService } from 'src/utils/storage.service';
 import { randomString } from 'src/utils/functions';
+import { Readable } from 'stream';
+import { Document } from '@prisma/client';
 
 @Injectable()
 export class DocService {
@@ -84,6 +87,40 @@ export class DocService {
       data: {
         id: newDoc.id,
       },
+    };
+  }
+
+  async downloadSdxFile(id: string) {
+    id = id.split('.')[0];
+
+    // Fetch doc
+    const doc = await db.document.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    // Ensure doc exists
+    if (!doc) {
+      throw new NotFoundException('Invalid document');
+    }
+
+    const sdxFile = new Readable();
+    sdxFile.push(
+      JSON.stringify({
+        sdxId: doc.sdxId,
+        secret: doc.secret,
+        name: doc.name,
+        validTill: doc.validTill,
+        issuedOn: doc.issuedOn,
+      }),
+    );
+
+    sdxFile.push(null);
+
+    return {
+      name: doc.name,
+      file: sdxFile,
     };
   }
 }
