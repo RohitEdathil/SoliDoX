@@ -69,7 +69,8 @@ export class UserService {
 
   async attemptPersistantLogin() {
     // Fetch the access token from local storage
-    const accessToken = window.localStorage.getItem('accessToken');
+    // const accessToken = window.localStorage.getItem('accessToken');
+    const accessToken = undefined;
     const account = await this.provider.listAccounts();
 
     this.address = account[0];
