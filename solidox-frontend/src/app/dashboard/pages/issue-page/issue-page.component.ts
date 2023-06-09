@@ -11,6 +11,8 @@ export class IssuePageComponent {
   file: File | null = null;
   expiryDate: string | null = null;
 
+  result: string | null = null;
+
   constructor(
     private notifService: NotifService,
     private docService: DocService
@@ -26,9 +28,11 @@ export class IssuePageComponent {
       this.notifService.error('Please select a file');
       return;
     }
-    await this.docService.issue(
+    this.result = null;
+    const docId = await this.docService.issue(
       this.file,
       this.expiryDate ? new Date(this.expiryDate) : null
     );
+    this.result = docId;
   }
 }

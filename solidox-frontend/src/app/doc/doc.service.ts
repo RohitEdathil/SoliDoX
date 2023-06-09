@@ -35,8 +35,10 @@ export class DocService {
     if (expiryDate)
       formData.append('expiryDate', expiryDate?.toISOString() ?? '');
 
-    await this.apiService.postFormData('/doc', formData);
+    const response = await this.apiService.postFormData('/doc', formData);
 
     this.notifService.end('Document issued');
+
+    return `${this.apiService.baseUrl}/doc/sdxFile/${response.data.id}?access_token=${this.apiService.token}`;
   }
 }

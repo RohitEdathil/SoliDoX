@@ -14,5 +14,14 @@
     <button (click)="issue()" class="btn-medium btn-extra-margin">
       Confirm
     </button>
+
+    <a
+      *ngIf="result != null"
+      href="{{ result }}"
+      target="_blank"
+      class="btn-medium btn-extra-margin"
+    >
+      Download SDX File
+    </a>
   </form>
 </main>
