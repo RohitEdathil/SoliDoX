@@ -10,6 +10,7 @@ import { verifyMessage } from 'ethers';
 import { success } from 'src/utils/responses';
 import { JwtService } from '@nestjs/jwt';
 import { StorageService } from 'src/utils/storage.service';
+import { randomString } from 'src/utils/functions';
 
 @Injectable()
 export class DocService {
@@ -68,6 +69,7 @@ export class DocService {
         localPath: path,
         issuedOn: new Date(),
         name: doc.originalname,
+        secret: randomString(10),
         sdxId,
         issuedBy: {
           connect: {

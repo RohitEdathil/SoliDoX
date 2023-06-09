@@ -30,6 +30,7 @@ model Document {
   id        String       @id @default(auto()) @map("_id") @db.ObjectId
   sdxId     String
   name      String
+  secret    String
   issuedBy  Organization @relation(fields: [issuerId], references: [id])
   issuerId  String       @db.ObjectId
   issuedOn  DateTime
