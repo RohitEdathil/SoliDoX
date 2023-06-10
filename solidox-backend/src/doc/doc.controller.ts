@@ -37,15 +37,24 @@ export class DocController {
     );
   }
 
-  @Get('sdxFile/:id')
+  @Get('sdx/:id')
   @UseGuards(AuthGuard)
-  async downloadSdxFile(@Param() data: DownloadSdxDto, @Res() res: Response) {
-    const result = await this.docService.downloadSdxFile(data.id);
+  async downloadSdx(@Param() data: DownloadSdxDto, @Res() res: Response) {
+    const result = await this.docService.downloadSdx(data.id);
     res.setHeader('Content-Type', 'application/octet-stream');
     res.setHeader(
       'Content-Disposition',
       'attachment; filename=' + result.name + '.sdx.id',
     );
+    result.file.pipe(res);
+  }
+
+  @Get('file/:id')
+  @UseGuards(AuthGuard)
+  async downloadFile(@Param() data: DownloadSdxDto, @Res() res: Response) {
+    const result = await this.docService.downloadFile(data.id);
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Disposition', 'attachment; filename=' + result.name);
     result.file.pipe(res);
   }
 

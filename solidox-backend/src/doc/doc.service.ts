@@ -91,7 +91,7 @@ export class DocService {
     };
   }
 
-  async downloadSdxFile(id: string) {
+  async downloadSdx(id: string) {
     id = id.split('.')[0];
 
     // Fetch doc
@@ -122,6 +122,28 @@ export class DocService {
     return {
       name: doc.name,
       file: sdxFile,
+    };
+  }
+  async downloadFile(id: string) {
+    id = id.split('.')[0];
+
+    // Fetch doc
+    const doc = await db.document.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    // Ensure doc exists
+    if (!doc) {
+      throw new NotFoundException('Invalid document');
+    }
+
+    const file = await this.storageService.get(doc.localPath);
+
+    return {
+      name: doc.name,
+      file,
     };
   }
 

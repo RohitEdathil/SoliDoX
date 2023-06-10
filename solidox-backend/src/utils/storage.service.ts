@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { createReadStream } from 'fs';
 import { outputFile } from 'fs-extra';
+import { Readable } from 'stream';
 
 @Injectable()
 export class StorageService {
@@ -10,5 +12,10 @@ export class StorageService {
 
     // Store to local file system
     await outputFile(location, file.buffer);
+  }
+
+  async get(path: string): Promise<Readable> {
+    const fileReadable = createReadStream(`storage/${path}`);
+    return fileReadable;
   }
 }
