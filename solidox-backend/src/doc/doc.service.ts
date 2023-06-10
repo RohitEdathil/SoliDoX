@@ -73,6 +73,7 @@ export class DocService {
         issuedOn: new Date(),
         name: doc.originalname,
         secret: randomString(10),
+        fileSize,
         sdxId,
         issuedBy: {
           connect: {
@@ -121,6 +122,42 @@ export class DocService {
     return {
       name: doc.name,
       file: sdxFile,
+    };
+  }
+
+  async list(orgId: string) {
+    // Fetch the org from the database
+    const org = await db.organization.findFirst({
+      where: {
+        id: orgId,
+      },
+    });
+
+    // Check if the org exists
+    if (!org) {
+      throw new NotFoundException('Invalid organization');
+    }
+
+    // Fetch the docs
+    const docs = await db.document.findMany({
+      where: {
+        issuedBy: {
+          id: orgId,
+        },
+      },
+      select: {
+        id: true,
+        sdxId: true,
+        name: true,
+        issuedOn: true,
+        validTill: true,
+        fileSize: true,
+      },
+    });
+
+    return {
+      ...success('Documents fetched successfully'),
+      data: docs,
     };
   }
 }

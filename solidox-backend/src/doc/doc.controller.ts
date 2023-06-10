@@ -48,4 +48,10 @@ export class DocController {
     );
     result.file.pipe(res);
   }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  async list(@Req() req: ExtendedRequest) {
+    return this.docService.list(req.orgId);
+  }
 }
