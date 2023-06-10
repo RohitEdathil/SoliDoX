@@ -1,4 +1,70 @@
 <app-nav></app-nav>
 <main>
   <app-banner title="Documents"></app-banner>
+
+  <span>
+    <h2>{{ searchText == "" ? "All Documents" : "Search Result" }}</h2>
+    <input
+      type="text"
+      id="search-bar"
+      placeholder="Search"
+      [(ngModel)]="searchText"
+    />
+  </span>
+  <table *ngIf="docs.length > 0">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Issued On</th>
+      <th>Valid Till</th>
+      <th>Size</th>
+      <th>Validity</th>
+      <th style="width: 100px"></th>
+    </tr>
+
+    <tr *ngFor="let doc of filteredDocs">
+      <td>{{ doc.sdxId }}</td>
+      <td>{{ doc.name }}</td>
+      <td>{{ doc.issuedOn | date }}</td>
+      <td>{{ doc.validTill | date }}</td>
+      <td>{{ doc.fileSize / 1024 | number : "1.0-1" }}KB</td>
+
+      <!-- Validity Checker -->
+      <td *ngIf="!(doc.isValid | async)">...</td>
+      <td *ngIf="doc.isValid | async">
+        <p [ngClass]="doc.isValid | async">
+          {{ doc.isValid | async }}
+        </p>
+      </td>
+      <!-- Validity Checker -->
+
+      <td id="action-container">
+        <button
+          class="icon-btn smooth"
+          title="Download File"
+          (click)="downloadFile(doc)"
+        >
+          <img src="/assets/icons/download.svg" alt="" />
+        </button>
+        <button
+          class="icon-btn smooth"
+          title="Download SDX File"
+          (click)="downloadSdx(doc)"
+        >
+          <img src="/assets/icons/key.svg" alt="" />
+        </button>
+        <button class="icon-btn-bad smooth icon-btn" title="Delete">
+          <img src="/assets/icons/delete.svg" alt="" />
+        </button>
+        <button
+          class="icon-btn-bad smooth icon-btn"
+          *ngIf="(doc.isValid | async) == 'valid'"
+          title="Mark as Invalid"
+          (click)="invalidate(doc)"
+        >
+          <img src="/assets/icons/close.svg" alt="" />
+        </button>
+      </td>
+    </tr>
+  </table>
 </main>

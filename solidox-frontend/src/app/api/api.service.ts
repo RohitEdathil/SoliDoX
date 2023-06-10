@@ -32,7 +32,7 @@ export class ApiService {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.token}`,
         },
-        body: JSON.stringify(body),
+        body: method == 'GET' ? null : JSON.stringify(body),
       });
     }
 
@@ -47,6 +47,10 @@ export class ApiService {
 
   async post(path: string, body: Object) {
     return await this._fetch(path, 'POST', body);
+  }
+
+  async get(path: string) {
+    return await this._fetch(path, 'GET');
   }
 
   async postFormData(path: string, body: FormData) {

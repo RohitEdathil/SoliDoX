@@ -5,6 +5,8 @@
   flex-direction: column;
   align-items: center;
   width: 270px;
+  position: fixed;
+  height: 100%;
 }
 
 h1 {

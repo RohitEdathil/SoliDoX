@@ -33,6 +33,6 @@ export class IssuePageComponent {
       this.file,
       this.expiryDate ? new Date(this.expiryDate) : null
     );
-    this.result = docId;
+    this.result = this.docService.getDownloadSdxUrl(docId);
   }
 }
