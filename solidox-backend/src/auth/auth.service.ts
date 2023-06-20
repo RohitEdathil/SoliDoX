@@ -53,6 +53,10 @@ export class AuthService {
       orgId: account.id,
     });
 
-    return { ...success('Login successful'), accessToken: accessToken };
+    return {
+      ...success('Login successful'),
+      accessToken: accessToken,
+      id: account.id,
+    };
   }
 }
