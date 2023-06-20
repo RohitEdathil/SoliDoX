@@ -9,6 +9,7 @@ import { OrgController } from './org/org.controller';
 import { DocController } from './doc/doc.controller';
 import { DocService } from './doc/doc.service';
 import { StorageService } from './utils/storage.service';
+import { OrgService } from './org/org.service';
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { StorageService } from './utils/storage.service';
     }),
   ],
   controllers: [AppController, AuthController, OrgController, DocController],
-  providers: [AppService, AuthService, DocService, StorageService],
+  providers: [AppService, AuthService, OrgService, DocService, StorageService],
 })
 export class AppModule {}
