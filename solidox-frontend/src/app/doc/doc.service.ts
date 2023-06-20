@@ -88,4 +88,12 @@ export class DocService {
 
     this.notifService.end('Invalidated');
   }
+
+  async delete(doc: Doc) {
+    this.notifService.start('Deleting');
+
+    await this.apiService.delete(`/doc/${doc.id}`);
+
+    this.notifService.end('Deleted');
+  }
 }

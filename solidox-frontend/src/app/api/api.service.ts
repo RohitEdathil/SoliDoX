@@ -53,6 +53,10 @@ export class ApiService {
     return await this._fetch(path, 'GET');
   }
 
+  async delete(path: string) {
+    return await this._fetch(path, 'DELETE');
+  }
+
   async postFormData(path: string, body: FormData) {
     return await this._fetch(path, 'POST', {}, body);
   }

@@ -30,7 +30,11 @@ export class DashboardPageComponent {
     return this.docs.filter((doc) => this.isMatch(doc));
   }
 
-  async delete(doc: Doc) {}
+  async delete(doc: Doc) {
+    await this.docService.delete(doc);
+    await this._loadData();
+  }
+
   async invalidate(doc: Doc) {
     await this.docService.invalidate(doc);
     await this._loadData();
