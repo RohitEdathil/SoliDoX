@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   provider: ethers.providers.Web3Provider;
+  accountId!: string;
   signer!: ethers.providers.JsonRpcSigner;
   address!: string;
   constructor(
@@ -63,6 +64,8 @@ export class UserService {
 
     this.apiService.setToken(loginResponse.accessToken);
     window.localStorage.setItem('accessToken', loginResponse.accessToken);
+    window.localStorage.setItem('accountId', loginResponse.id);
+    this.accountId = loginResponse.id;
 
     this.router.navigate(['/dashboard']);
   }
@@ -70,6 +73,8 @@ export class UserService {
   async attemptPersistantLogin() {
     // Fetch the access token from local storage
     const accessToken = window.localStorage.getItem('accessToken');
+    const accountId = window.localStorage.getItem('accountId');
+    this.accountId = accountId || '';
     // const accessToken = undefined;
     const account = await this.provider.listAccounts();
 

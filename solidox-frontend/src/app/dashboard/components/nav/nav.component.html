@@ -1,5 +1,5 @@
 <h1>Solidox</h1>
-<h2>GEC Barton Hill</h2>
+<h2>{{ org.name }}</h2>
 
 <ul>
   <a routerLink="/dashboard" routerLinkActive="active"
@@ -24,5 +24,8 @@
 </a>
 <div id="usage">
   <div id="out"><div id="in"></div></div>
-  <p>3GB of 10GB</p>
+  <p>
+    {{ org.usedStorage / (1024 * 1024) | number : "1.0-1" }}MB of
+    {{ org.availableStorage / (1024 * 1024) | number : "1.0-1" }}MB
+  </p>
 </div>
