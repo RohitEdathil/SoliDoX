@@ -21,7 +21,14 @@
   ><img src="/assets/icons/settings.svg" /><label>Settings</label>
 </a>
 <div id="usage">
-  <div id="out"><div id="in"></div></div>
+  <div id="out">
+    <div
+      id="in"
+      [ngStyle]="{
+        width: (org.usedStorage / org.availableStorage) * 100 + '%'
+      }"
+    ></div>
+  </div>
   <p>
     {{ org.usedStorage / (1024 * 1024) | number : "1.0-1" }}MB of
     {{ org.availableStorage / (1024 * 1024) | number : "1.0-1" }}MB
