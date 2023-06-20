@@ -182,4 +182,56 @@ export class DocService {
       data: docs,
     };
   }
+
+  async delete(id: string) {
+    // Fetch doc
+    const doc = await db.document.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    // Ensure doc exists
+    if (!doc) {
+      throw new NotFoundException('Invalid document');
+    }
+
+    // Fetch the org from the database
+    const org = await db.organization.findFirst({
+      where: {
+        id: doc.issuerId,
+      },
+    });
+
+    // Check if the org exists
+    if (!org) {
+      throw new NotFoundException('Invalid organization');
+    }
+
+    // Delete the doc
+    await db.document.delete({
+      where: {
+        id,
+      },
+    });
+
+    // Update the used storage
+    await db.organization.update({
+      where: {
+        id: org.id,
+      },
+      data: {
+        usedStorage: {
+          decrement: doc.fileSize,
+        },
+      },
+    });
+
+    // Delete the file
+    await this.storageService.delete(doc.localPath);
+
+    return {
+      ...success('Document deleted successfully'),
+    };
+  }
 }

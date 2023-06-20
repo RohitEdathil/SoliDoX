@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { createReadStream } from 'fs';
-import { outputFile } from 'fs-extra';
+import { outputFile, remove } from 'fs-extra';
 import { Readable } from 'stream';
 
 @Injectable()
@@ -17,5 +17,10 @@ export class StorageService {
   async get(path: string): Promise<Readable> {
     const fileReadable = createReadStream(`storage/${path}`);
     return fileReadable;
+  }
+
+  async delete(path: string) {
+    // Delete from local file system
+    await remove(`storage/${path}`);
   }
 }

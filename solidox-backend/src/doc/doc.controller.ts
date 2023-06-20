@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -62,5 +63,11 @@ export class DocController {
   @UseGuards(AuthGuard)
   async list(@Req() req: ExtendedRequest) {
     return this.docService.list(req.orgId);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard)
+  async delete(@Param('id') id: string, @Req() req: ExtendedRequest) {
+    return this.docService.delete(id);
   }
 }
