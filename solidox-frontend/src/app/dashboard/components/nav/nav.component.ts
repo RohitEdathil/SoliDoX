@@ -9,7 +9,7 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent {
-  org: Org = new Org('', '', '', 0, 0);
+  org: Org = new Org('', ' ', '', 0, 0);
 
   constructor(
     private orgService: OrgService,
