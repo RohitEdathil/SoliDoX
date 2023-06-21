@@ -91,6 +91,40 @@ export class DocService {
     };
   }
 
+  async verify(sdxId: string, secret: string) {
+    // Fetch the doc from the database
+    const doc = await db.document.findFirst({
+      where: {
+        sdxId,
+      },
+      include: {
+        issuedBy: true,
+      },
+    });
+
+    // Check if the doc exists
+    if (!doc) {
+      throw new NotFoundException('Invalid document');
+    }
+
+    // Verify the secret
+    if (doc.secret !== secret) {
+      throw new UnauthorizedException('Invalid secret');
+    }
+
+    return {
+      ...success('Document verified successfully'),
+      data: {
+        id: doc.id,
+        name: doc.name,
+        issuedOn: doc.issuedOn,
+
+        validTill: doc.validTill,
+        issuerName: doc.issuedBy.name,
+      },
+    };
+  }
+
   async downloadSdx(id: string) {
     id = id.split('.')[0];
 

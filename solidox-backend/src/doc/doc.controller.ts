@@ -11,7 +11,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateDocDto, DownloadSdxDto } from './doc.dto';
+import { CreateDocDto, DownloadSdxDto, VerifyDto } from './doc.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { DocService } from './doc.service';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -69,5 +69,10 @@ export class DocController {
   @UseGuards(AuthGuard)
   async delete(@Param('id') id: string, @Req() req: ExtendedRequest) {
     return this.docService.delete(id);
+  }
+
+  @Get('verify')
+  async verify(@Body() data: VerifyDto) {
+    return this.docService.verify(data.sdxId, data.secret);
   }
 }
