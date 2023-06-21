@@ -1,4 +1,34 @@
 <app-nav></app-nav>
 <main>
   <app-banner title="Verify"></app-banner>
+
+  <form class="form-wrapper" *ngIf="result == undefined">
+    <div class="input-wrapper">
+      <p>Upload SDX file</p>
+      <input
+        type="file"
+        name="file"
+        (change)="fileChanged($event)"
+        accept=".sdx.id"
+      />
+    </div>
+
+    <button class="btn-medium btn-extra-margin" (click)="verify()">
+      Confirm
+    </button>
+  </form>
+
+  <app-verified
+    class="form-wrapper"
+    *ngIf="result != undefined"
+    [result]="result"
+  >
+  </app-verified>
+  <button
+    (click)="clear()"
+    class="btn-medium btn-light"
+    *ngIf="result != undefined"
+  >
+    Back
+  </button>
 </main>

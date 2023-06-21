@@ -1,0 +1,48 @@
+<div class="form-wrapper" *ngIf="result != undefined">
+  <table>
+    <tr>
+      <th colspan="2">Result</th>
+    </tr>
+    <tr>
+      <td>ID</td>
+      <td>{{ result.doc.id }}</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>{{ result.doc.name }}</td>
+    </tr>
+    <tr>
+      <td>Issued By</td>
+      <td>{{ result.orgName }}</td>
+    </tr>
+    <tr>
+      <td>Valid Till</td>
+      <td>{{ result.doc.validTill | date }}</td>
+    </tr>
+    <tr>
+      <td>Validity</td>
+      <td>
+        <p [ngClass]="result.validity">{{ result.validity }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Files</td>
+      <td id="action-container">
+        <button
+          class="icon-btn smooth"
+          title="Download File"
+          (click)="downloadFile(result.doc.id)"
+        >
+          <img src="/assets/icons/download.svg" alt="" />
+        </button>
+        <button
+          class="icon-btn smooth"
+          title="Download SDX File"
+          (click)="downloadSdx(result.doc.id)"
+        >
+          <img src="/assets/icons/key.svg" alt="" />
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -3,12 +3,12 @@
 
   <div class="input-wrapper">
     <p>Organization Name</p>
-    <input class="wide-input" type="text" />
+    <input class="wide-input" type="text" [(ngModel)]="name" />
   </div>
 
   <div class="input-wrapper">
     <p>Email ID</p>
-    <input class="wide-input" type="email" />
+    <input class="wide-input" type="email" [(ngModel)]="email" />
   </div>
 
   <button (click)="signup()">Submit</button>

@@ -143,3 +143,18 @@ td {
 .wide-input {
   width: 600px;
 }
+
+.valid {
+  color: var(--bg);
+  background-color: var(--good);
+}
+
+.expired {
+  color: var(--bg);
+  background-color: var(--warn);
+}
+
+.invalid {
+  color: var(--bg);
+  background-color: var(--bad);
+}

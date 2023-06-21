@@ -99,4 +99,22 @@ export class UserService {
       this.router.navigate(['/dashboard']);
     }
   }
+
+  async signup(name: string, email: string) {
+    await this.apiService.post('/auth/signup', {
+      orgName: name,
+      email: email,
+    });
+
+    this.notifService.show('Our team will contact you soon.');
+  }
+
+  async logout() {
+    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('accountId');
+    this.apiService.setToken('');
+    this.address = '';
+    this.accountId = '';
+    this.router.navigate(['/login']);
+  }
 }

@@ -44,21 +44,49 @@ export class DocService {
     return response.data.id;
   }
 
+  async verify(sdxFile: File | null) {
+    if (!sdxFile) {
+      this.notifService.error('Please select an SDX file');
+      return;
+    }
+
+    this.notifService.start('Checking');
+
+    const content = JSON.parse(await sdxFile.text());
+
+    const sdxId = content.sdxId;
+    const secret = content.secret;
+
+    const serverResult = await this.apiService.post('/doc/verify', {
+      sdxId,
+      secret,
+    });
+    const validity = await this.getValidity(sdxId);
+
+    this.notifService.end('Ready');
+
+    return {
+      doc: Doc.fromJson(serverResult.data),
+      validity,
+      orgName: serverResult.data.issuerName,
+    };
+  }
+
   async list() {
     const docsData = await this.apiService.get('/doc');
     const docs = docsData.data.map((docData: any) => {
       const doc = Doc.fromJson(docData);
-      doc.isValid = this.getValidity(doc);
+      doc.isValid = this.getValidity(doc.sdxId);
       return doc;
     });
     return docs;
   }
 
-  async getValidity(doc: Doc): Promise<string> {
+  async getValidity(sdxId: string): Promise<string> {
     let validity = 'invalid';
     try {
       // @ts-ignore
-      const result = await this.sdx.getDocumentData(doc.sdxId);
+      const result = await this.sdx.getDocumentData(sdxId);
       const [_, expiryTimeStamp] = result.split('-');
 
       validity =

@@ -1,4 +1,19 @@
 <app-nav></app-nav>
 <main>
   <app-banner title="Settings"></app-banner>
+
+  <form class="form-wrapper">
+    <h2>Additional links</h2>
+
+    <div>
+      <a href="#" target="_blank" class="btn-medium">
+        Request additional storage
+      </a>
+      <a href="#" target="_blank" class="btn-medium"> Contact support </a>
+
+      <button class="btn-medium btn-extra-margin" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </form>
 </main>

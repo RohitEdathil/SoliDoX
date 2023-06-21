@@ -4,21 +4,6 @@
   flex-direction: row;
 }
 
-.valid {
-  color: var(--bg);
-  background-color: var(--good);
-}
-
-.expired {
-  color: var(--bg);
-  background-color: var(--warn);
-}
-
-.invalid {
-  color: var(--bg);
-  background-color: var(--bad);
-}
-
 #action-container {
   display: flex;
   flex-direction: row;
