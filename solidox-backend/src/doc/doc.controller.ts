@@ -71,7 +71,7 @@ export class DocController {
     return this.docService.delete(id);
   }
 
-  @Get('verify')
+  @Post('verify')
   async verify(@Body() data: VerifyDto) {
     return this.docService.verify(data.sdxId, data.secret);
   }
