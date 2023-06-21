@@ -17,6 +17,7 @@ import { BannerComponent } from './dashboard/components/banner/banner.component'
 import { IssuePageComponent } from './dashboard/pages/issue-page/issue-page.component';
 import { FormsModule } from '@angular/forms';
 import { VerifiedComponent } from './components/verified/verified.component';
+import { VerifyExtPageComponent } from './home/verify-ext-page/verify-ext-page.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -36,6 +37,7 @@ export function playerFactory(): any {
     BannerComponent,
     IssuePageComponent,
     VerifiedComponent,
+    VerifyExtPageComponent,
   ],
   imports: [
     BrowserModule,

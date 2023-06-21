@@ -1,0 +1,25 @@
+<div class="haze-border" id="container">
+  <h1>Verify</h1>
+
+  <div class="input-wrapper" *ngIf="result == undefined">
+    <p>SDX File</p>
+    <input
+      class="wide-input"
+      type="file"
+      (change)="fileChanged($event)"
+      accept=".sdx.id"
+    />
+  </div>
+
+  <app-verified
+    class="form-wrapper"
+    *ngIf="result != undefined"
+    [result]="result"
+  >
+  </app-verified>
+
+  <button (click)="verify()" *ngIf="result == undefined">Submit</button>
+  <button (click)="clear()" class="btn-light" *ngIf="result != undefined">
+    Back
+  </button>
+</div>

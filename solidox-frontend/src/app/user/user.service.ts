@@ -27,7 +27,15 @@ export class UserService {
 
     this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
   }
-  async login() {
+
+  async attemptLogin() {
+    if (this.accountId) {
+      return;
+    }
+    await this.login(false);
+  }
+
+  async login(redirect: boolean = true) {
     await this.provider.send('eth_requestAccounts', []);
     const account = await this.provider.listAccounts();
 
@@ -67,6 +75,10 @@ export class UserService {
     window.localStorage.setItem('accountId', loginResponse.id);
     this.accountId = loginResponse.id;
 
+    if (!redirect) {
+      return;
+    }
+
     this.router.navigate(['/dashboard']);
   }
 
@@ -82,7 +94,7 @@ export class UserService {
     this.signer = this.provider.getSigner();
 
     // Paths that do not require authentication
-    const publicPaths = ['/', '/login', '/signup', '/verify'];
+    const publicPaths = ['/', '/login', '/signup', '/verify-ext'];
 
     // no access token, redirect to login if not on a public path
     if (!accessToken) {

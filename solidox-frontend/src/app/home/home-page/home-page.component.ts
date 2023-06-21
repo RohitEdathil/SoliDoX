@@ -21,4 +21,8 @@ export class HomePageComponent {
   goToLogin() {
     this.router.navigate(['/login']);
   }
+
+  goToVerify() {
+    this.router.navigate(['/verify-ext']);
+  }
 }
